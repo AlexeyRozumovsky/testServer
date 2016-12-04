@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function send(){
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://localhost:8888/test', true);
+
+        xhr.onload = function(data) {
+            console.log(data);
+        };
+
+        xhr.send();
+    }
+</script>
+<button onclick="send()">SENDDDDD</button>
+</body>
+</html>

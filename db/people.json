@@ -1,0 +1,77 @@
+[
+    {
+        "id": 2,
+        "name": "Dmitriy Bilokon",
+        "photo": "http://lorempixel.com/60/60/people/2"
+    },
+    {
+        "id": 3,
+        "name": "Kseniya Kuhlevskaya",
+        "photo": "http://lorempixel.com/60/60/people/3"
+    },
+    {
+        "id": 4,
+        "name": "Andrei Mazur",
+        "photo": "http://lorempixel.com/60/60/people/4"
+    },
+    {
+        "id": 5,
+        "name": "Daria Maltseva",
+        "photo": "http://lorempixel.com/60/60/people/5"
+    },
+    {
+        "id": 6,
+        "name": "Ekaterina Filippova",
+        "photo": "http://lorempixel.com/60/60/people/6"
+    },
+    {
+        "id": 7,
+        "name": "Maria Ivashchenko",
+        "photo": "http://lorempixel.com/60/60/people/7"
+    },
+    {
+        "id": 8,
+        "name": "Alexander Sirik",
+        "photo": "http://lorempixel.com/60/60/people/8"
+    },
+    {
+        "id": 9,
+        "name": "Vladimir Liannoy",
+        "photo": "http://lorempixel.com/60/60/people/9"
+    },
+    {
+        "id": 10,
+        "name": "Alexey Razumovsky",
+        "photo": "http://lorempixel.com/60/60/people/10"
+    },
+    {
+        "id": 11,
+        "name": "Sergei Ermolaev",
+        "photo": "http://lorempixel.com/60/60/people/4"
+    },
+    {
+        "id": 12,
+        "name": "Yulia Kudina",
+        "photo": "http://lorempixel.com/60/60/people/6"
+    },
+    {
+        "id": 13,
+        "name": "Maxim Kushnir",
+        "photo": "http://lorempixel.com/60/60/people/2"
+    },
+    {
+        "id": 14,
+        "name": "Evgeniy Safonov",
+        "photo": "http://lorempixel.com/60/60/people/8"
+    },
+    {
+        "id": 15,
+        "name": "Olga Ivanchenko",
+        "photo": "http://lorempixel.com/60/60/people/2"
+    },
+    {
+        "id": 16,
+        "name": "Anton Kolodov",
+        "photo": "http://lorempixel.com/60/60/people/3"
+    }
+]
