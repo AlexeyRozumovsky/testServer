@@ -64,8 +64,12 @@ function updatePeople(request, response) {
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(curPerson));
 
-        if(dataChanged){
+        if (dataChanged) {
             writeJSON("people", people);
+
+            for (var key in clients) {
+                clients[key].send("PERSON #" + curPerson.id + " was updated");
+            }
         }
     });
 
@@ -87,7 +91,7 @@ function removePeople(request, response) {
         people.forEach(function (person, index) {
             if (person.id == postData.id) {
 
-               people.splice(index, 1);
+                people.splice(index, 1);
                 dataChanged = true;
             }
         });
@@ -95,7 +99,7 @@ function removePeople(request, response) {
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify({result: "ok"}));
 
-        if(dataChanged){
+        if (dataChanged) {
             writeJSON("people", people);
         }
     });
@@ -136,3 +140,36 @@ exports.upload = upload;
 exports.getPeople = getPeople;
 exports.updatePeople = updatePeople;
 exports.removePeople = removePeople;
+
+
+var WebSocketServer = new require('ws');
+
+// подключенные клиенты
+var clients = {};
+
+// WebSocket-сервер на порту 8081
+var webSocketServer = new WebSocketServer.Server({
+    port: 8081
+});
+
+
+webSocketServer.on('connection', function (ws) {
+
+    var id = Math.random();
+    clients[id] = ws;
+    console.log("новое соединение " + id);
+
+    ws.on('message', function (message) {
+        console.log('получено сообщение ' + message);
+
+        for (var key in clients) {
+            clients[key].send(message);
+        }
+    });
+
+    ws.on('close', function () {
+        console.log('соединение закрыто ' + id);
+        delete clients[id];
+    });
+
+});

@@ -13,3 +13,10 @@ handle["/remove/people"] = requestHandlers.removePeople;
 
 
 server.startServer(router.route, handle);
+
+
+
+
+
+
+

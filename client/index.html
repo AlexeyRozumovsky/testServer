@@ -6,16 +6,33 @@
 </head>
 <body>
 <script>
+
+    var socket = new WebSocket("ws://localhost:8081/test/testServer/");
+
+
+    socket.onopen = function() {
+        console.log("Соединение установлено.");
+    };
+
+    //socket.onclose = function(event) {
+    //    if (event.wasClean) {
+    //        alert('Соединение закрыто чисто');
+    //    } else {
+    //        alert('Обрыв соединения'); // например, "убит" процесс сервера
+    //    }
+    //    alert('Код: ' + event.code + ' причина: ' + event.reason);
+    //};
+
+    socket.onmessage = function(event) {
+        console.warn("Получены данные " + event.data);
+    };
+
+    //socket.onerror = function(error) {
+    //    alert("Ошибка " + error.message);
+    //};
+
     function send(){
-        var xhr = new XMLHttpRequest();
-
-        xhr.open('GET', 'http://localhost:8888/test', true);
-
-        xhr.onload = function(data) {
-            console.log(data);
-        };
-
-        xhr.send();
+        socket.send("");
     }
 </script>
 <button onclick="send()">SENDDDDD</button>
