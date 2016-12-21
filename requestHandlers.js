@@ -88,6 +88,8 @@ function removePeople(request, response) {
             curPerson = {},
             dataChanged = false;
 
+        console.log("postdata: ", postData);
+
         people.forEach(function (person, index) {
             if (person.id == postData.id) {
 
