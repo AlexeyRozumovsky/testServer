@@ -1,14 +1,5 @@
 var fs = require('fs');
 var querystring = require('querystring');
-var people = require("./people_without_smiles");
-
-function start(request, response) {
-
-
-    response.writeHead(200, {"Content-Type": "text/html"});
-    //response.write();
-    response.end(JSON.stringify(people));
-}
 
 function test(request, response) {
     var queryData = "";
@@ -24,18 +15,17 @@ function test(request, response) {
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(postData));
     });
-
 }
 
-function getPeople(request, response) {
+//PEOPLE
+exports.getPeople = function (request, response) {
     var people = readJSON("people");
 
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(JSON.stringify(people));
+};
 
-}
-
-function updatePeople(request, response) {
+exports.updatePeople = function (request, response) {
     var people = readJSON("people"),
         queryData = "";
 
@@ -73,9 +63,9 @@ function updatePeople(request, response) {
         }
     });
 
-}
+};
 
-function removePeople(request, response) {
+exports.removePeople = function (request, response, personId) {
     var people = readJSON("people"),
         queryData = "";
 
@@ -88,10 +78,9 @@ function removePeople(request, response) {
             curPerson = {},
             dataChanged = false;
 
-        console.log("postdata: ", postData);
-
+        console.log("postData", postData);
         people.forEach(function (person, index) {
-            if (person.id == postData.id) {
+            if (person.id == personId) {
 
                 people.splice(index, 1);
                 dataChanged = true;
@@ -105,27 +94,80 @@ function removePeople(request, response) {
             writeJSON("people", people);
         }
     });
+};
 
-}
+//CATEGORIES
+exports.getAllCategories = function (request, response) {
+    var categories = readJSON("categories");
+
+    response.writeHead(200, {'Content-Type': 'application/json'});
+    response.end(JSON.stringify(categories));
+};
 
 
-function upload(request, response) {
+//SMILES
+exports.getAllSmiles = function (request, response) {
+    var smilesConfig = readJSON("smiles");
 
-    var queryData = "";
+    response.writeHead(200, {'Content-Type': 'application/json'});
+    response.end(JSON.stringify(smilesConfig.smiles));
+};
+
+exports.addSmiles = function (request, response) {
+    var smilesConfig = readJSON("smiles"),
+        queryData = "";
 
     request.on('data', function (data) {
         queryData += data;
     });
 
+    request.on('end', function () {
+        var postData = JSON.parse(queryData),
+            autoIncrement = smilesConfig.settings.autoIncrement;
+
+        postData.forEach(function (smile) {
+            smile.id = ++autoIncrement;
+            smile.time = new Date().getTime();
+        });
+
+        smilesConfig.settings.autoIncrement = autoIncrement;
+        smilesConfig.smiles = smilesConfig.smiles.concat(postData);
+        writeJSON("smiles", smilesConfig);
+
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(smilesConfig.smiles)); //TODO: Do we need to get all smiles back?
+
+    });
+};
+
+exports.removeSmile = function (request, response, smileId) {
+    var smilesConfig = readJSON("smiles"),
+        smiles = smilesConfig.smiles,
+        queryData = "";
+
+    request.on('data', function (data) {
+        //Left empty
+    });
 
     request.on('end', function () {
-        var obj = querystring.parse(queryData);
-        console.log(obj);
-        // response.write(JSON.stringify(postData));
-        // response.writeHead(413, {'Content-Type': 'application/json'});
-        // response.end();
+        var dataChanged = false;
+
+        smiles.forEach(function (smile, index) {
+            if (smile.id == smileId) {
+
+                smiles.splice(index, 1);
+                dataChanged = true;
+            }
+        });
+
+        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify(smiles));
+
+        if (dataChanged) {
+            writeJSON("smiles", smilesConfig);
+        }
     });
-}
+};
 
 
 function readJSON(path) {
@@ -137,11 +179,7 @@ function writeJSON(path, content) {
 }
 
 exports.test = test;
-exports.start = start;
-exports.upload = upload;
-exports.getPeople = getPeople;
-exports.updatePeople = updatePeople;
-exports.removePeople = removePeople;
+//exports.start = start;
 
 
 var WebSocketServer = new require('ws');

@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "autoIncrement": 2
+    },
+    "smiles": [
+        {
+            "personId": 5,
+            "catId": 2,
+            "type": "sad",
+            "id": 1,
+            "time": 1482332093306
+        },
+        {
+            "personId": 6,
+            "catId": 3,
+            "type": "happy",
+            "id": 2,
+            "time": 1482332093306
+        }
+    ]
+}
