@@ -20,27 +20,14 @@ var express = require("express"),
     port = 5000,
     requestHandlers = require("./requestHandlers");
 
-// /* serves main page */
-// app.get("/", function (req, res) {
-//     res.sendfile('index.htm')
-// });
-//
-// app.post("/user/add", function (req, res) {
-//     /* some server side logic */
-//     res.send("OK");
-// });
-//
-// /* serves all the static files */
-// app.get(/^(.+)$/, function (req, res) {
-//     console.log('static file request : ' + req.params);
-//     res.sendfile(__dirname + req.params[0]);
-// });
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+//TODO: How to make router which depends on url?
 
 app.get("/remove/people/:id", function (req, res) {
     var personId = req.params.id;

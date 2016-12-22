@@ -134,6 +134,10 @@ exports.addSmiles = function (request, response) {
         smilesConfig.smiles = smilesConfig.smiles.concat(postData);
         writeJSON("smiles", smilesConfig);
 
+        for (var key in clients) {
+            clients[key].send("Smiles updated");
+        }
+
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(smilesConfig.smiles)); //TODO: Do we need to get all smiles back?
 
@@ -165,6 +169,10 @@ exports.removeSmile = function (request, response, smileId) {
 
         if (dataChanged) {
             writeJSON("smiles", smilesConfig);
+
+            for (var key in clients) {
+                clients[key].send("Smiles updated");
+            }
         }
     });
 };
@@ -182,6 +190,7 @@ exports.test = test;
 //exports.start = start;
 
 
+//TODO: Move WebSocket to separate file
 var WebSocketServer = new require('ws');
 
 // подключенные клиенты
