@@ -56,6 +56,10 @@ app.post("/addSmiles", function (req, res) {
     requestHandlers.addSmiles(req, res);
 });
 
+app.post("/people/update", function (req, res) {
+    requestHandlers.updatePeople(req, res);
+});
+
 
 app.listen(port, function () {
     console.log("Listening on " + port);

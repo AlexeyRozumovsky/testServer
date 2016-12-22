@@ -34,12 +34,14 @@ exports.updatePeople = function (request, response) {
     });
 
     request.on('end', function () {
-        var postData = querystring.parse(queryData),
+        var postData = JSON.parse(queryData),
             curPerson = {},
             dataChanged = false;
 
+        console.log(postData);
+
         people.forEach(function (person) {
-            if (person.id == postData.id) {
+            if (person.id === postData.id) {
                 if (postData.name && postData.name.length > 3) {
                     person.name = postData.name;
                 }
@@ -52,13 +54,13 @@ exports.updatePeople = function (request, response) {
         });
 
         response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify(curPerson));
+        response.end();
 
         if (dataChanged) {
             writeJSON("people", people);
 
             for (var key in clients) {
-                clients[key].send("PERSON #" + curPerson.id + " was updated");
+                clients[key].send("People updated");
             }
         }
     });
