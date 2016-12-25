@@ -1,5 +1,10 @@
 var fs = require('fs');
 var querystring = require('querystring');
+var StorageTable = require('./js/StorageTable.js');
+
+
+var treem = new StorageTable("treem");
+
 
 function test(request, response) {
     var queryData = "";
@@ -111,6 +116,9 @@ exports.getAllCategories = function (request, response) {
 exports.getAllSmiles = function (request, response) {
     var smilesConfig = readJSON("smiles");
 
+    //smiles.getAll();
+
+
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(JSON.stringify(smilesConfig.smiles));
 };
@@ -138,7 +146,13 @@ exports.addSmiles = function (request, response) {
 
         for (var key in clients) {
             clients[key].send("Smiles updated");
+            //clients[key].send({
+            //    action : "update",
+            //    updated: "smiles"
+            //});
         }
+
+        //clientNotifier.updated("smiles");
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(smilesConfig.smiles)); //TODO: Do we need to get all smiles back?
@@ -190,6 +204,7 @@ function writeJSON(path, content) {
 
 exports.test = test;
 //exports.start = start;
+
 
 
 //TODO: Move WebSocket to separate file

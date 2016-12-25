@@ -27,6 +27,19 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+/*var get = {
+    "/remove/people/:id" : requestHandlers.removePeople,
+    "/people" : requestHandlers.getPeople
+};
+
+
+for(var cb in get){
+    app.get(cb, get[cb]);
+}*/
+
+
+
 //TODO: How to make router which depends on url?
 
 app.get("/remove/people/:id", function (req, res) {
@@ -43,6 +56,10 @@ app.get("/categories", function (req, res) {
 });
 
 app.get("/smiles", function (req, res) {
+    requestHandlers.getAllSmiles(req, res);
+});
+
+app.get("/smiles/byPerson/:id", function (req, res) {
     requestHandlers.getAllSmiles(req, res);
 });
 
