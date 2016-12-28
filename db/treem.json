@@ -1,6 +1,6 @@
 {
     "settings": {
-        "autoIncrement": 52,
+        "autoIncrement": 18,
         "fields": {
             "name": "text",
             "text": "text",
@@ -9,89 +9,24 @@
     },
     "records": [
         {
-            "text": "hi!",
+            "text": "array 1",
             "type": "active",
-            "id": 36
+            "id": 11
         },
         {
-            "text": "hi!",
+            "text": "array 2!",
             "type": "active",
-            "id": 37
+            "id": 12
         },
         {
-            "text": "hi!",
+            "text": "array 1",
             "type": "active",
-            "id": 38
+            "id": 15
         },
         {
-            "text": "hi!",
+            "text": "array 4",
             "type": "active",
-            "id": 39
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 40
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 41
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 42
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 43
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 44
-        },
-        {
-            "text": "hi!",
-            "type": "active",
-            "id": 45
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 46
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 47
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 48
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 49
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 50
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 51
-        },
-        {
-            "text": "hi!",
-            "type": "removed",
-            "id": 52
+            "id": 18
         }
     ]
 }

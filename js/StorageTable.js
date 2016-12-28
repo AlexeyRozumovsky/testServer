@@ -1,6 +1,6 @@
 "use strict";
 
-var fs = require('fs');
+var utils = require('../utils');
 
 class StorageTable {
 
@@ -10,18 +10,33 @@ class StorageTable {
     }
 
     _loadFile() {
-        this.data = readJSON(this.tableName);
+        console.log("THIS", this);
+        this.data = utils.readJSON(this.tableName);
         this.records = this.data.records;
         this.settings = this.data.settings;
+        console.log(this.settings);
     }
 
-    //TODO: home task - create insert many functionality
-    insert(object) {
-        this._loadFile();
+    //TODO: DONE - show to kotik // H.W. - create insert many functionality
+    // Yes, we can avoid to call private method _tryToInsert and place its code to ELSE block, but this way we have make recursive calls
+    insert(objectToInsert) {
+        let me = this;
 
-        object.id = this._generateId();
-        this.records.push(object);
-        this._updateTable();
+        if (Array.isArray(objectToInsert)) {
+            objectToInsert.forEach(me._tryToInsert.bind(me));
+        } else {
+            me._tryToInsert(objectToInsert)
+        }
+    }
+
+    _tryToInsert(objectToInsert) {
+        let me = this;
+
+        me._loadFile();
+
+        objectToInsert.id = me._generateId();
+        me.records.push(objectToInsert);
+        me._updateTable();
     }
 
     get(id) {
@@ -39,6 +54,9 @@ class StorageTable {
     }
 
     getAll() {
+
+
+
         this._loadFile();
 
         return this.records;
@@ -59,12 +77,27 @@ class StorageTable {
         this._updateTable();
     }
 
-    //TODO - create
+    //TODO DONE - show to kotik // H.W.- create
     remove(id) {
+        var me = this;
+
+        if (Array.isArray(id)) {
+            id.forEach(me.remove.bind(me));
+        } else {
+            me._loadFile();
+            me.records.forEach(function (record, index, array) {
+                if (record.id === id) {
+                    array.splice(index, 1);
+
+                }
+            });
+
+            me._updateTable();
+        }
     }
 
     _updateTable() {
-        writeJSON(this.tableName, {
+        utils.writeJSON(this.tableName, {
             settings: this.settings,
             records: this.records
         });
@@ -79,21 +112,38 @@ class StorageTable {
 /*var treem = new StorageTable("treem");
 
 
-console.log(treem.getAll().filter(function (record) {
-    return record.type == "active";
-}));*/
+ console.log(treem.getAll().filter(function (record) {
+ return record.type == "active";
+ }));*/
 
 
-function readJSON(path) {
-    var json = JSON.parse(fs.readFileSync("db/" + path + ".json", 'utf8'));
-    //console.log("readJSON", path, json);
-    return json;
-}
+var treem = new StorageTable("treem");
 
-function writeJSON(path, content) {
-    //console.log("writeJSON", path, content);
+// treem.insert([
+//     {
+//         "text": "array 1",
+//         "type": "active"
+//     },
+//     {
+//         "text": "array 2!",
+//         "type": "active"
+//     },
+//     {
+//         "text": "array 3",
+//         "type": "active"
+//     },
+//     {
+//         "text": "array 4",
+//         "type": "active"
+//     }]);
+//
+// treem.insert({
+//     "text": "single",
+//     "type": "active"
+// });
 
-    fs.writeFileSync("db/" + path + ".json", JSON.stringify(content, null, 4));
-}
+//treem.remove([16,17]);
+
+
 
 module.exports = StorageTable;
