@@ -10,33 +10,25 @@ class StorageTable {
     }
 
     _loadFile() {
-        console.log("THIS", this);
+        // console.log("THIS", this);
         this.data = utils.readJSON(this.tableName);
         this.records = this.data.records;
         this.settings = this.data.settings;
-        console.log(this.settings);
+        //console.log(this.settings);
     }
 
-    //TODO: DONE - show to kotik // H.W. - create insert many functionality
-    // Yes, we can avoid to call private method _tryToInsert and place its code to ELSE block, but this way we have make recursive calls
     insert(objectToInsert) {
         let me = this;
 
         if (Array.isArray(objectToInsert)) {
-            objectToInsert.forEach(me._tryToInsert.bind(me));
+            objectToInsert.forEach(me.insert.bind(me));
         } else {
-            me._tryToInsert(objectToInsert)
+            me._loadFile();
+
+            objectToInsert.id = me._generateId();
+            me.records.push(objectToInsert);
+            me._updateTable();
         }
-    }
-
-    _tryToInsert(objectToInsert) {
-        let me = this;
-
-        me._loadFile();
-
-        objectToInsert.id = me._generateId();
-        me.records.push(objectToInsert);
-        me._updateTable();
     }
 
     get(id) {
@@ -54,12 +46,9 @@ class StorageTable {
     }
 
     getAll() {
-
-
-
         this._loadFile();
 
-        return this.records;
+        return JSON.stringify(this.records);
     }
 
     update(object) {
@@ -77,7 +66,6 @@ class StorageTable {
         this._updateTable();
     }
 
-    //TODO DONE - show to kotik // H.W.- create
     remove(id) {
         var me = this;
 
@@ -86,9 +74,8 @@ class StorageTable {
         } else {
             me._loadFile();
             me.records.forEach(function (record, index, array) {
-                if (record.id === id) {
+                if (record.id === parseInt(id)) {
                     array.splice(index, 1);
-
                 }
             });
 
@@ -108,42 +95,5 @@ class StorageTable {
     }
 
 }
-
-/*var treem = new StorageTable("treem");
-
-
- console.log(treem.getAll().filter(function (record) {
- return record.type == "active";
- }));*/
-
-
-var treem = new StorageTable("treem");
-
-// treem.insert([
-//     {
-//         "text": "array 1",
-//         "type": "active"
-//     },
-//     {
-//         "text": "array 2!",
-//         "type": "active"
-//     },
-//     {
-//         "text": "array 3",
-//         "type": "active"
-//     },
-//     {
-//         "text": "array 4",
-//         "type": "active"
-//     }]);
-//
-// treem.insert({
-//     "text": "single",
-//     "type": "active"
-// });
-
-//treem.remove([16,17]);
-
-
 
 module.exports = StorageTable;

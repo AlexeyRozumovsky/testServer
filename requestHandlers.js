@@ -2,8 +2,11 @@ var fs = require('fs');
 var querystring = require('querystring');
 var StorageTable = require('./js/StorageTable.js');
 
+var peopleManager = new StorageTable("people");
+var categoriesManager = new StorageTable("categories");
+var smilesManager = new StorageTable("smiles");
 
-var treem = new StorageTable("treem");
+
 
 
 function test(request, response) {
@@ -15,7 +18,6 @@ function test(request, response) {
 
     request.on('end', function () {
         var postData = querystring.parse(queryData);
-        console.log(postData);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify(postData));
@@ -24,125 +26,82 @@ function test(request, response) {
 
 //PEOPLE
 exports.getPeople = function (request, response) {
-    var people = readJSON("people");
+    var data = peopleManager.getAll();
 
     response.writeHead(200, {'Content-Type': 'application/json'});
-    response.end(JSON.stringify(people));
+    response.end(data);
 };
 
 exports.updatePeople = function (request, response) {
-    var people = readJSON("people"),
-        queryData = "";
+    var queryData = "";
 
     request.on('data', function (data) {
         queryData += data;
     });
 
     request.on('end', function () {
-        var postData = JSON.parse(queryData),
-            curPerson = {},
-            dataChanged = false;
+        var postData = JSON.parse(queryData);
 
-        console.log(postData);
-
-        people.forEach(function (person) {
-            if (person.id === postData.id) {
-                if (postData.name && postData.name.length > 3) {
-                    person.name = postData.name;
-                }
-                if (postData.photo && postData.photo.length > 10) {
-                    person.photo = postData.photo;
-                }
-                curPerson = person;
-                dataChanged = true;
-            }
-        });
+        peopleManager.update(postData);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end();
 
-        if (dataChanged) {
-            writeJSON("people", people);
-
-            for (var key in clients) {
-                clients[key].send("People updated");
-            }
+        for (var key in clients) {
+            clients[key].send("People updated");
         }
     });
-
 };
 
 exports.removePeople = function (request, response, personId) {
-    var people = readJSON("people"),
-        queryData = "";
 
     request.on('data', function (data) {
-        queryData += data;
+
     });
 
     request.on('end', function () {
-        var postData = querystring.parse(queryData),
-            curPerson = {},
-            dataChanged = false;
-
-        console.log("postData", postData);
-        people.forEach(function (person, index) {
-            if (person.id == personId) {
-
-                people.splice(index, 1);
-                dataChanged = true;
-            }
-        });
+        peopleManager.remove(personId);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(JSON.stringify({result: "ok"}));
 
-        if (dataChanged) {
-            writeJSON("people", people);
+        for (var key in clients) {
+            clients[key].send("People updated");
         }
     });
 };
 
 //CATEGORIES
 exports.getAllCategories = function (request, response) {
-    var categories = readJSON("categories");
+    var data = categoriesManager.getAll();
 
     response.writeHead(200, {'Content-Type': 'application/json'});
-    response.end(JSON.stringify(categories));
+    response.end(data);
 };
-
 
 //SMILES
 exports.getAllSmiles = function (request, response) {
-    var smilesConfig = readJSON("smiles");
-
-    //smiles.getAll();
-
+    var data = smilesManager.getAll();
 
     response.writeHead(200, {'Content-Type': 'application/json'});
-    response.end(JSON.stringify(smilesConfig.smiles));
+    response.end(data);
 };
 
 exports.addSmiles = function (request, response) {
-    var smilesConfig = readJSON("smiles"),
-        queryData = "";
+    var queryData = "";
 
     request.on('data', function (data) {
         queryData += data;
     });
 
     request.on('end', function () {
-        var postData = JSON.parse(queryData),
-            autoIncrement = smilesConfig.settings.autoIncrement;
+        var postData = JSON.parse(queryData);
 
         postData.forEach(function (smile) {
-            smile.id = ++autoIncrement;
             smile.time = new Date().getTime();
         });
 
-        smilesConfig.settings.autoIncrement = autoIncrement;
-        smilesConfig.smiles = smilesConfig.smiles.concat(postData);
-        writeJSON("smiles", smilesConfig);
+        smilesManager.insert(postData);
 
         for (var key in clients) {
             clients[key].send("Smiles updated");
@@ -155,40 +114,26 @@ exports.addSmiles = function (request, response) {
         //clientNotifier.updated("smiles");
 
         response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify(smilesConfig.smiles)); //TODO: Do we need to get all smiles back?
-
+        response.end(); //TODO: Send only updated part and process it on client
     });
 };
 
 exports.removeSmile = function (request, response, smileId) {
-    var smilesConfig = readJSON("smiles"),
-        smiles = smilesConfig.smiles,
-        queryData = "";
+    var queryData = "";
 
     request.on('data', function (data) {
         //Left empty
     });
 
     request.on('end', function () {
-        var dataChanged = false;
-
-        smiles.forEach(function (smile, index) {
-            if (smile.id == smileId) {
-
-                smiles.splice(index, 1);
-                dataChanged = true;
-            }
-        });
+        console.log("Smile id", smileId);
+        smilesManager.remove(smileId);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify(smiles));
+        response.end();
 
-        if (dataChanged) {
-            writeJSON("smiles", smilesConfig);
-
-            for (var key in clients) {
-                clients[key].send("Smiles updated");
-            }
+        for (var key in clients) {
+            clients[key].send("Smiles updated");
         }
     });
 };
@@ -204,7 +149,6 @@ function writeJSON(path, content) {
 
 exports.test = test;
 //exports.start = start;
-
 
 
 //TODO: Move WebSocket to separate file

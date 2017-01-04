@@ -1,42 +1,55 @@
 {
     "settings": {
-        "autoIncrement": 5
+        "autoIncrement": 19,
+        "fields": {
+            "personId": "number",
+            "type": "text",
+            "catId": "number",
+            "time": "number"
+        }
     },
-    "smiles": [
+    "records": [
         {
             "personId": 1,
             "type": "happy",
-            "catId": "1",
-            "id": 1,
-            "time": 1482921069836
-        },
-        {
-            "personId": 5,
-            "type": "happy",
-            "catId": "1",
-            "id": 2,
-            "time": 1482921882494
+            "catId": 1,
+            "time": 1483530786760,
+            "id": 14
         },
         {
             "personId": 10,
-            "type": "happy",
-            "catId": "10",
-            "id": 3,
-            "time": 1482922111051
+            "type": "sad",
+            "catId": 3,
+            "time": 1483530799713,
+            "id": 15
         },
         {
-            "personId": 2,
-            "type": "happy",
-            "catId": "5",
-            "id": 4,
-            "time": 1482922251106
+            "personId": 10,
+            "type": "sad",
+            "catId": 4,
+            "time": 1483530799713,
+            "id": 16
         },
         {
-            "personId": 8,
-            "type": "happy",
-            "catId": "4",
-            "id": 5,
-            "time": 1482922584779
+            "personId": 10,
+            "type": "sad",
+            "catId": 5,
+            "time": 1483530799713,
+            "id": 17
+        },
+        {
+            "personId": 10,
+            "type": "sad",
+            "catId": 6,
+            "time": 1483530799713,
+            "id": 18
+        },
+        {
+            "personId": 10,
+            "type": "sad",
+            "catId": 7,
+            "time": 1483530799713,
+            "id": 19
         }
     ]
 }
