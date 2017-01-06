@@ -2,9 +2,9 @@
   "settings": {
     "autoIncrement": 0,
     "fields": {
-      "name": "text",
-      "img": "text",
-      "description": "text"
+      "name": "string",
+      "img": "string",
+      "description": "string"
     }
   },
   "records": [

@@ -16,12 +16,12 @@
 
 
 var express = require("express"),
+    requestHandlers = require("./requestHandlers"),
     app = express(),
-    port = 5000,
-    requestHandlers = require("./requestHandlers");
+    port = 5000;
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -29,14 +29,14 @@ app.use(function(req, res, next) {
 
 
 /*var get = {
-    "/remove/people/:id" : requestHandlers.removePeople,
-    "/people" : requestHandlers.getPeople
-};
+ "/remove/people/:id" : requestHandlers.removePeople,
+ "/people" : requestHandlers.getPeople
+ };
 
 
-for(var cb in get){
-    app.get(cb, get[cb]);
-}*/
+ for(var cb in get){
+ app.get(cb, get[cb]);
+ }*/
 
 
 

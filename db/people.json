@@ -2,8 +2,8 @@
   "settings": {
     "autoIncrement": 0,
     "fields": {
-      "name": "text",
-      "photo": "text"
+      "name": "string",
+      "photo": "string"
     }
   },
   "records": [

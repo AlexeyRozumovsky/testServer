@@ -1,20 +1,22 @@
 "use strict";
 
-var utils = require('../utils');
+var utils = require('../utils'),
+    notifier = new (require('../clientNotifier.js'))();
+
 
 class StorageTable {
 
     constructor(tableName) {
         this.tableName = tableName;
-        //this.loadFile();
     }
 
     _loadFile() {
-        // console.log("THIS", this);
-        this.data = utils.readJSON(this.tableName);
-        this.records = this.data.records;
-        this.settings = this.data.settings;
-        //console.log(this.settings);
+        const me = this;
+
+        me.data = utils.readJSON(me.tableName);
+        me.records = me.data.records;
+        me.settings = me.data.settings;
+        me.requiredFields = me.settings.fields;
     }
 
     insert(objectToInsert) {
@@ -22,13 +24,33 @@ class StorageTable {
 
         if (Array.isArray(objectToInsert)) {
             objectToInsert.forEach(me.insert.bind(me));
-        } else {
+        } else if (me._checkTheValidity(objectToInsert)) {
+
             me._loadFile();
 
             objectToInsert.id = me._generateId();
             me.records.push(objectToInsert);
             me._updateTable();
+
+            notifier.updateClients(me.tableName);
+        } else {
+            notifier.sendMessage("Invalid smile");
         }
+    }
+
+    _checkTheValidity(objectToInsert) {
+        const me = this;
+        let counter = 0,
+            requiredNum = Object.keys(me.requiredFields).length,
+            key;
+
+        for (key in objectToInsert) {
+            if (objectToInsert.hasOwnProperty(key) && (typeof objectToInsert[key] === me.requiredFields[key])) {
+                counter++;
+            }
+        }
+
+        return counter === requiredNum;
     }
 
     get(id) {
@@ -64,6 +86,8 @@ class StorageTable {
         });
 
         this._updateTable();
+
+        notifier.updateClients(me.tableName);
     }
 
     remove(id) {
@@ -73,13 +97,15 @@ class StorageTable {
             id.forEach(me.remove.bind(me));
         } else {
             me._loadFile();
-            me.records.forEach(function (record, index, array) {
+            me.records.forEach(function (record) {
                 if (record.id === parseInt(id)) {
-                    array.splice(index, 1);
+                    record.active = false;
                 }
             });
 
             me._updateTable();
+
+            notifier.updateClients(me.tableName);
         }
     }
 

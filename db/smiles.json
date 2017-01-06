@@ -1,10 +1,11 @@
 {
     "settings": {
-        "autoIncrement": 19,
+        "autoIncrement": 75,
         "fields": {
             "personId": "number",
-            "type": "text",
+            "type": "string",
             "catId": "number",
+            "active": "boolean",
             "time": "number"
         }
     },
@@ -13,43 +14,89 @@
             "personId": 1,
             "type": "happy",
             "catId": 1,
-            "time": 1483530786760,
-            "id": 14
+            "active": true,
+            "time": 1483737032935,
+            "id": 65
         },
         {
-            "personId": 10,
-            "type": "sad",
+            "personId": 1,
+            "type": "happy",
+            "catId": 2,
+            "active": true,
+            "time": 1483737032935,
+            "id": 66
+        },
+        {
+            "personId": 1,
+            "type": "happy",
             "catId": 3,
-            "time": 1483530799713,
-            "id": 15
+            "active": true,
+            "time": 1483737032935,
+            "id": 67
         },
         {
-            "personId": 10,
-            "type": "sad",
+            "personId": 1,
+            "type": "happy",
             "catId": 4,
-            "time": 1483530799713,
-            "id": 16
+            "active": true,
+            "time": 1483737032935,
+            "id": 68
         },
         {
-            "personId": 10,
-            "type": "sad",
+            "personId": 1,
+            "type": "happy",
             "catId": 5,
-            "time": 1483530799713,
-            "id": 17
+            "active": true,
+            "time": 1483737032935,
+            "id": 69
         },
         {
-            "personId": 10,
+            "personId": 1,
             "type": "sad",
-            "catId": 6,
-            "time": 1483530799713,
-            "id": 18
+            "catId": 10,
+            "active": false,
+            "time": 1483737039915,
+            "id": 70
         },
         {
-            "personId": 10,
+            "personId": 1,
             "type": "sad",
-            "catId": 7,
-            "time": 1483530799713,
-            "id": 19
+            "catId": 11,
+            "active": false,
+            "time": 1483737039915,
+            "id": 71
+        },
+        {
+            "personId": 1,
+            "type": "sad",
+            "catId": 12,
+            "active": false,
+            "time": 1483737039915,
+            "id": 72
+        },
+        {
+            "personId": 1,
+            "type": "sad",
+            "catId": 13,
+            "active": false,
+            "time": 1483737039915,
+            "id": 73
+        },
+        {
+            "personId": 1,
+            "type": "sad",
+            "catId": 14,
+            "active": false,
+            "time": 1483737039915,
+            "id": 74
+        },
+        {
+            "personId": 1,
+            "type": "sad",
+            "catId": 26,
+            "active": true,
+            "time": 1483737274339,
+            "id": 75
         }
     ]
 }

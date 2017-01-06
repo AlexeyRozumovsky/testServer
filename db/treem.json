@@ -2,8 +2,8 @@
     "settings": {
         "autoIncrement": 18,
         "fields": {
-            "name": "text",
-            "text": "text",
+            "name": "string",
+            "text": "string",
             "age": "number"
         }
     },

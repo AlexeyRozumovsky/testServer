@@ -1,13 +1,9 @@
-var fs = require('fs');
-var querystring = require('querystring');
-var StorageTable = require('./js/StorageTable.js');
-
-var peopleManager = new StorageTable("people");
-var categoriesManager = new StorageTable("categories");
-var smilesManager = new StorageTable("smiles");
-
-
-
+var fs = require('fs'),
+    querystring = require('querystring'),
+    StorageTable = require('./js/StorageTable.js'),
+    peopleManager = new StorageTable("people"),
+    categoriesManager = new StorageTable("categories"),
+    smilesManager = new StorageTable("smiles");
 
 function test(request, response) {
     var queryData = "";
@@ -46,30 +42,9 @@ exports.updatePeople = function (request, response) {
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end();
-
-        for (var key in clients) {
-            clients[key].send("People updated");
-        }
     });
 };
 
-exports.removePeople = function (request, response, personId) {
-
-    request.on('data', function (data) {
-
-    });
-
-    request.on('end', function () {
-        peopleManager.remove(personId);
-
-        response.writeHead(200, {'Content-Type': 'application/json'});
-        response.end(JSON.stringify({result: "ok"}));
-
-        for (var key in clients) {
-            clients[key].send("People updated");
-        }
-    });
-};
 
 //CATEGORIES
 exports.getAllCategories = function (request, response) {
@@ -103,83 +78,23 @@ exports.addSmiles = function (request, response) {
 
         smilesManager.insert(postData);
 
-        for (var key in clients) {
-            clients[key].send("Smiles updated");
-            //clients[key].send({
-            //    action : "update",
-            //    updated: "smiles"
-            //});
-        }
-
-        //clientNotifier.updated("smiles");
-
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end(); //TODO: Send only updated part and process it on client
     });
 };
 
 exports.removeSmile = function (request, response, smileId) {
-    var queryData = "";
 
     request.on('data', function (data) {
         //Left empty
     });
 
     request.on('end', function () {
-        console.log("Smile id", smileId);
         smilesManager.remove(smileId);
 
         response.writeHead(200, {'Content-Type': 'application/json'});
         response.end();
-
-        for (var key in clients) {
-            clients[key].send("Smiles updated");
-        }
     });
 };
 
-
-function readJSON(path) {
-    return JSON.parse(fs.readFileSync("db/" + path + ".json", 'utf8'));
-}
-
-function writeJSON(path, content) {
-    fs.writeFile("db/" + path + ".json", JSON.stringify(content, null, 4));
-}
-
 exports.test = test;
-//exports.start = start;
-
-
-//TODO: Move WebSocket to separate file
-var WebSocketServer = new require('ws');
-
-// подключенные клиенты
-var clients = {};
-
-// WebSocket-сервер на порту 8081
-var webSocketServer = new WebSocketServer.Server({
-    port: 8081
-});
-
-
-webSocketServer.on('connection', function (ws) {
-
-    var id = Math.random();
-    clients[id] = ws;
-    console.log("новое соединение " + id);
-
-    ws.on('message', function (message) {
-        console.log('получено сообщение ' + message);
-
-        for (var key in clients) {
-            clients[key].send(message);
-        }
-    });
-
-    ws.on('close', function () {
-        console.log('соединение закрыто ' + id);
-        delete clients[id];
-    });
-
-});
