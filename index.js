@@ -16,6 +16,7 @@
 
 
 var express = require("express"),
+    cookieParser = require('cookie-parser'),
     requestHandlers = require("./requestHandlers"),
     app = express(),
     port = 5000;
@@ -26,6 +27,8 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use(cookieParser());
 
 
 /*var get = {
@@ -67,6 +70,10 @@ app.get("/remove/smile/:id", function (req, res) {
     var smileId = req.params.id;
 
     requestHandlers.removeSmile(req, res, smileId)
+});
+
+app.post("/login", function (req, res) {
+    requestHandlers.login(req, res);
 });
 
 app.post("/addSmiles", function (req, res) {
