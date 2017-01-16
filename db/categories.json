@@ -12,175 +12,204 @@
       "id": 1,
       "name": "Meeting hours",
       "img": "meeting_hours.png",
-      "description": "Meeting hours are from 11 to 17 Kyiv time"
+      "description": "Meeting hours are from 11 to 17 Kyiv time",
+      "class": "Meetings"
     },
     {
       "id": 2,
       "name": "Being a professional",
       "img": "being_a_professional.png",
-      "description": "Best practice = professional approach + friendly atmosphere"
+      "description": "Best practice = professional approach + friendly atmosphere",
+      "class": "General"
     },
     {
       "id": 3,
       "name": "Direct feedback",
       "img": "direct_feedback.png",
-      "description": "Practice direct feedback"
+      "description": "Practice direct feedback",
+      "class": "General"
     },
     {
       "id": 4,
       "name": "E-mails & invitations",
       "img": "emails_n_envitations.png",
-      "description": "Check your e-mails at least once a day and send responses to invitations!"
+      "description": "Check your e-mails at least once a day and send responses to invitations!",
+      "class": "Meetings"
     },
     {
       "id": 5,
       "name": "Respect",
       "img": "respect.png",
-      "description": "Respect your colleagues"
+      "description": "Respect your colleagues",
+      "class": "General"
     },
     {
       "id": 6,
       "name": "All-Hands and weekly meetings",
       "img": "allhandsmeeting.png",
-      "description": "Weekly meetings are for everyone + all-hands"
+      "description": "Weekly meetings are for everyone + all-hands",
+      "class": "Meetings"
     },
     {
       "id": 7,
       "name": "Working hours",
       "img": "arrival_time.png",
-      "description": "Came early? Write a [time] e-mail when leaving"
+      "description": "Came early? Write a [time] e-mail when leaving",
+      "class": "Presence/Absence"
     },
     {
       "id": 8,
       "name": "Timeliness",
       "img": "be_in_time_on_the_meetings.png",
-      "description": "Start, finish and come to the meetings on time"
+      "description": "Start, finish and come to the meetings on time",
+      "class": "Meetings"
     },
     {
       "id": 9,
       "name": "Strong language",
       "img": "Corse_2.png",
-      "description": "Avoid using strong language at the office"
+      "description": "Avoid using strong language at the office",
+      "class": "Open Space"
     },
     {
       "id": 10,
       "name": "Kitchen",
       "img": "cutlery.png",
-      "description": "Wash your dishes and clean the kitchen after yourself: tables, fridge and cupboards"
+      "description": "Wash your dishes and clean the kitchen after yourself: tables, fridge and cupboards",
+      "class": "Cleanliness"
     },
     {
       "id": 11,
       "name": "Device tracker",
       "img": "Device_Tracker.png",
-      "description": "Mandatory: reserve a device on the Device Tracker page"
+      "description": "Mandatory: reserve a device on the Device Tracker page",
+      "class": "Devices"
     },
     {
       "id": 12,
       "name": "Turn off",
       "img": "device_off.png",
-      "description": "Turn off a device before leaving it on the shelf when finished using it"
+      "description": "Turn off a device before leaving it on the shelf when finished using it",
+      "class": "Devices"
     },
     {
       "id": 13,
       "name": "Entertainment",
       "img": "distracted_attention_1.png",
-      "description": "Distractions & entertainment should not be parallel with work"
+      "description": "Distractions & entertainment should not be parallel with work",
+      "class": "General"
     },
     {
       "id": 14,
       "name": "Meetings are priority",
       "img": "Meetings_priority.png",
-      "description": "Do not bother people at the meeting"
+      "description": "Do not bother people at the meeting",
+      "class": "Meetings"
     },
     {
       "id": 15,
       "name": "Keeping to the point",
       "img": "keep_topic.png",
-      "description": "Keep your discussions relevant (no non-related topics)"
+      "description": "Keep your discussions relevant (no non-related topics)",
+      "class": "Meetings"
     },
     {
       "id": 16,
       "name": "Knowledge share",
       "img": "knowledge_share.png",
-      "description": "Share your knowledge"
+      "description": "Share your knowledge",
+      "class": "General"
     },
     {
       "id": 17,
       "name": "Noise",
       "img": "Loud_sounds.png",
-      "description": "Reduce the noise level in the open space"
+      "description": "Reduce the noise level in the open space",
+      "class": "Open Space"
     },
     {
       "id": 18,
       "name": "Preparation",
       "img": "meeting_prepared.png",
-      "description": "Prepare to the meetings and create them with a comprehensible agenda"
+      "description": "Prepare to the meetings and create them with a comprehensible agenda",
+      "class": "Meetings"
     },
     {
       "id": 19,
       "name": "Messengers",
       "img": "messengers.png",
-      "description": "Check HipChat and other communication channels at least once a day"
+      "description": "Check HipChat and other communication channels at least once a day",
+      "class": "Meetings"
     },
     {
       "id": 20,
       "name": "Sounds & music",
       "img": "Music.png",
-      "description": "Test the sounds only in headphones. Turn off the sound in the headphones when leaving your working place"
+      "description": "Test the sounds only in headphones. Turn off the sound in the headphones when leaving your working place",
+      "class": "Open Space"
     },
     {
       "id": 21,
       "name": "Charge",
       "img": "on_charge.png",
-      "description": "Put a device on charge when leaving it in the cell"
+      "description": "Put a device on charge when leaving it in the cell",
+      "class": "Devices"
     },
     {
       "id": 22,
       "name": "No OS update",
       "img": "OS_update.png",
-      "description": "Do not update the OS"
+      "description": "Do not update the OS",
+      "class": "Devices"
     },
     {
       "id": 23,
       "name": "Ringtones",
       "img": "phones_on_the_meetings.png",
-      "description": "Switch off phone ringtones"
+      "description": "Switch off phone ringtones",
+      "class": "Open Space"
     },
     {
       "id": 24,
       "name": "Respect & Politeness",
       "img": "poop.png",
-      "description": "Cleaning after yourself is a common courtesy"
+      "description": "Cleaning after yourself is a common courtesy",
+      "class": "Cleanliness"
     },
     {
       "id": 25,
       "name": "Private talks Vs. Work talks",
       "img": "private_talks.png",
-      "description": "Hold all telephone and private talks in the meeting rooms"
+      "description": "Hold all telephone and private talks in the meeting rooms",
+      "class": "Open Space"
     },
     {
       "id": 26,
       "name": "Vacation",
       "img": "vacation.png",
-      "description": "Going on vacation? Put it into semesterlistan in advance!"
+      "description": "Going on vacation? Put it into semesterlistan in advance!",
+      "class": "Presence/Absence"
     },
     {
       "id": 27,
       "name": "Bathrooms",
       "img": "WC_clean.png",
-      "description": "Keep it clean. You know what we mean "
+      "description": "Keep it clean. You know what we mean ",
+      "class": "Cleanliness"
     },
     {
       "id": 28,
       "name": "Meeting-free Wednesday",
       "img": "wed_no_meetings.png",
-      "description": "Wednesday is meeting-free"
+      "description": "Wednesday is meeting-free",
+      "class": "Meetings"
     },
     {
       "id": 29,
       "name": "Time tag",
       "img": "time_tag.png",
-      "description": "Late, leaving early or OOO? Yes. Write a [TIME] e-mail"
+      "description": "Late, leaving early or OOO? Yes. Write a [TIME] e-mail",
+      "class": "Presence/Absence"
     }
   ]
 }

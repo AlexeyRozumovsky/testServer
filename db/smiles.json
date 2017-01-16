@@ -1,6 +1,6 @@
 {
     "settings": {
-        "autoIncrement": 75,
+        "autoIncrement": 0,
         "fields": {
             "personId": "number",
             "type": "string",
@@ -10,93 +10,6 @@
         }
     },
     "records": [
-        {
-            "personId": 1,
-            "type": "happy",
-            "catId": 1,
-            "active": true,
-            "time": 1483737032935,
-            "id": 65
-        },
-        {
-            "personId": 1,
-            "type": "happy",
-            "catId": 2,
-            "active": true,
-            "time": 1483737032935,
-            "id": 66
-        },
-        {
-            "personId": 1,
-            "type": "happy",
-            "catId": 3,
-            "active": true,
-            "time": 1483737032935,
-            "id": 67
-        },
-        {
-            "personId": 1,
-            "type": "happy",
-            "catId": 4,
-            "active": true,
-            "time": 1483737032935,
-            "id": 68
-        },
-        {
-            "personId": 1,
-            "type": "happy",
-            "catId": 5,
-            "active": true,
-            "time": 1483737032935,
-            "id": 69
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 10,
-            "active": false,
-            "time": 1483737039915,
-            "id": 70
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 11,
-            "active": false,
-            "time": 1483737039915,
-            "id": 71
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 12,
-            "active": false,
-            "time": 1483737039915,
-            "id": 72
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 13,
-            "active": false,
-            "time": 1483737039915,
-            "id": 73
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 14,
-            "active": false,
-            "time": 1483737039915,
-            "id": 74
-        },
-        {
-            "personId": 1,
-            "type": "sad",
-            "catId": 26,
-            "active": true,
-            "time": 1483737274339,
-            "id": 75
-        }
+
     ]
 }
